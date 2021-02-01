@@ -1,0 +1,14 @@
+<!--https://python.doctor/page-django-login-authentification-de-base-apprendre-creer-cours-tutoriel-python-->
+<!--https://learndjango.com/tutorials/django-login-and-logout-tutorial-->
+<!--https://pythonprogramming.net/user-login-logout-django-tutorial/-->
+{% extends 'sfithonexUtility/base.html' %}
+
+
+{% block content %}
+    <h1>Login</h1>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit">
+        </form>
+{% endblock %}

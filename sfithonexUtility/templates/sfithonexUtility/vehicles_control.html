@@ -1,0 +1,96 @@
+{% extends 'sfithonexUtility/base.html' %}
+{% block content %}
+
+    {% if error == True %}
+        <div class="alert alert-danger text-center">
+            <strong>{{ error_message }}</strong>
+        </div>
+    {% endif %}
+    {% if error == False %}
+        <div class="alert alert-success text-center">
+            <strong>Les contrôles ont été enregistrés !</strong>
+        </div>
+    {% endif %}
+   <div class="table-responsive-sm text-nowrap">
+            <h1>Semestre en cours</h1>
+            <form method="POST" id="tableFormsetControl">
+
+                {{ formset.management_form }}
+                    {% for form in formset %}
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger text-center">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <h2>Contrôle du {{form.date}}</h2>
+                        <table>
+                            <tr class="table-dark">
+                                <td style="background-color:#3366ff; color:#fff; border: solid black 2px;" class="text-center">
+                                    Responsable
+                                </td>
+                                <td>
+                                    {{form.resp_control}}
+                                </td>
+
+                            </tr>
+                            <tr class="table-dark">
+                                <td style="background-color:#ff4d4d; color:#fff; border: solid black 2px;" class="text-center">
+                                    Tonne
+                                </td>
+
+                                <td>
+                                    {{form.sap_tonne}}
+                                </td>
+
+                            </tr>
+                            <tr class="table-dark">
+                                <td style="background-color:#808080; color:#fff; border: solid black 2px;" class="text-center">
+                                    Porte-berce
+                                </td>
+
+                                <td>
+                                    {{form.sap_renault}}
+                                </td>
+                            </tr>
+                            <tr class="table-dark">
+                                <td style="background-color:#008000; color:#fff; border: solid black 2px;" class="text-center">
+                                    Transport
+                                </td>
+
+                                <td>
+                                    {{form.sap_mercedes}}
+                                </td>
+
+                            </tr>
+                            <tr class="table-dark">
+                                <td style="background-color:#ffa500; color:#fff; border: solid black 2px;" class="text-center">
+                                    Support
+                                </td>
+
+                                <td>
+                                   {{form.sap_mitsubishi}}
+                                </td>
+
+                            </tr>
+
+                        </table>
+                        <br>
+
+                    {% endfor %}
+                <input type="submit" class="btnbtn-primary" value="submit">
+            </form>
+
+   </div>
+
+{% endblock %}

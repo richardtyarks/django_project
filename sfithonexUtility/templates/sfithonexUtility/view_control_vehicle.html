@@ -1,0 +1,98 @@
+{% extends 'sfithonexUtility/base.html' %}
+{% block content %}
+    <div class="table-responsive-sm text-nowrap">
+            <h1>Semestre en cours</h1>
+            {% for control in list_control %}
+                <table  class="table-dark">
+                    <tr>
+                        <th style="background-color:#608d5d; color:#fff; border: solid black 2px;" class="text-center">Contrôle du {{control.date}}</th>
+                    </tr>
+                </table>
+                <br>
+                <table class="table-dark">
+                    <tr >
+                        <th style="background-color:#3366ff; color:#fff; border: solid black 2px;" class="text-center">Responsable</th>
+                    </tr>
+                    <tr  class="table-dark">
+                        {% for control_resp in list_control_resp %}
+                            {% if control_resp == control.user_id %}
+                                <td>
+                                    {{control_resp}}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="table-dark">
+                        <th style="background-color:#ff4d4d; color: #fff; border: solid black 2px;" class="text-center">{{tonne.name}}</th>
+                    </tr>
+
+                    <tr  class="table-dark">
+                        {% for detail in details %}
+                            {% if detail.control == control and detail.vehicle == tonne %}
+
+                                <td>
+                                    {{detail.sapeur}}
+                                </td>
+
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="table-dark">
+
+                        <th style="background-color:#808080; color: #fff; border: solid black 2px;" class="text-center">Porte-berce</th>
+
+                    </tr>
+                        <tr class="table-dark">
+                            {% for detail in details %}
+                                {% if detail.control == control and detail.vehicle == berce %}
+
+                                    <td>
+                                        {{detail.sapeur}}
+                                    </td>
+
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    <tr class="table-dark">
+
+                        <th style="background-color:#008000; color: #fff; border: solid black 2px;" class="text-center">Transport</th>
+
+                    </tr>
+                    <tr class="table-dark">
+                        {% for detail in details %}
+                            {% if detail.control == control and detail.vehicle == transport %}
+
+                                <td>
+                                    {{detail.sapeur}}
+                                </td>
+
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr class="table-dark">
+
+                        <th style="background-color:#ffa500; color: #fff; border: solid black 2px;" class="text-center">Support</th>
+
+                    </tr>
+                    <tr class="table-dark">
+                        {% for detail in details %}
+                            {% if detail.control == control and detail.vehicle == support %}
+
+                                <td>
+                                    {{detail.sapeur}}
+                                </td>
+
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br>
+            {% endfor %}
+
+    </div>
+{% endblock %}
+
+
+
+
+

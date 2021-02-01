@@ -1,0 +1,17 @@
+#tableFormsetControl{
+
+    width: 100%;
+
+}
+tr{
+    display: inline-block;
+
+}
+td{
+    color: #1c1818;
+
+}
+
+.table-dark>td{
+    background-color: white;
+}

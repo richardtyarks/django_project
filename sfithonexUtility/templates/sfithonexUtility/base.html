@@ -1,0 +1,78 @@
+{# Load the tag library #}
+{% load static %}
+{% load bootstrap4 %}
+
+<html lang="fr">
+    <head>
+        <title>SFI THONEX</title>
+        <meta charset="UTF-8">
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/control.css' %}">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-xl navbar-light bg-light">
+          <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">
+              <img class="logo horizontal-logo" src="{% static 'image/logo.png' %}" width="200" height="200" alt="logo pompier">
+              </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+              <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'alarm_list' %}">ALARMES</a>
+                </li>
+                {% if user.is_authenticated %}
+                  <li class="nav-item">
+                        <a class="nav-link" href="{% url 'control_sapeur' %}">Contrôle Véhicule</a>
+                  </li>
+                  <li class="nav-item">
+                        <a class="nav-link" href="{% url 'connexion' %}" title="Déconnexion ?">Bonjour! {{ user.name }}!</a>
+                  </li>
+                  {% if user.grade == 'Cap' or user.grade == 'Fourr' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'control_create' %}">Gestion Contrôle</a>
+                    </li>
+                  {% endif %}
+
+                {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'connexion' %}">CONNEXION</a>
+                  </li>
+                {% endif %}
+
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <br>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <br>
+
+
+
+        <footer class="page-footer font-small bg-dark">
+              <!-- Copyright -->
+              <div class="footer-copyright text-center py-3 text-white">© 2020 Copyright :
+                <a href="#" class="text-white">Richard TYARKS</a>
+              </div>
+              <!-- Copyright -->
+        </footer>
+    </body>
+
+</html>

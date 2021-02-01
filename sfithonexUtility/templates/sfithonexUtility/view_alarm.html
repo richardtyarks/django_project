@@ -1,0 +1,22 @@
+{% extends 'sfithonexUtility/base.html' %}
+
+
+{% block content %}
+
+
+<h1>Interventions par années</h1>
+
+    <p>{% for year in years %}</p>
+        <h2>{{ year }}</h2>
+            <p>{% for alarm in alarms %}</p>
+                {% if year in alarm.yearpublished %}
+                    <h3>{{ alarm.type }} {{ alarm.description }} </h3><h3></h3>
+                {% endif %}
+            <p>{% endfor %}</p>
+    <p>{% endfor %}</p>
+
+
+
+
+
+{% endblock %}
